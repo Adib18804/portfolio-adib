@@ -1,22 +1,30 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { GlitchText } from "./effects/GlitchText";
 import { CyberButton } from "./ui/cyber-button";
 import { ArrowRight, Terminal } from "lucide-react";
 import Link from "next/link";
+import { CyberGrid, BlockchainNodes, BinaryRain } from "./ui/backgrounds";
 
 export const Hero = () => {
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-            {/* Animated Background Grid */}
-            <div className="absolute inset-0 z-0 opacity-20">
-                <div className="absolute inset-0 bg-[linear-gradient(to_right,#333_1px,transparent_1px),linear-gradient(to_bottom,#333_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
-            </div>
-
+            {/* Animated Backgrounds */}
+            <CyberGrid />
+            <BlockchainNodes />
+            <BinaryRain />
+            
             {/* Floating Particles (Simulated with CSS/Divs for performance) */}
             <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                {[...Array(20)].map((_, i) => (
+                {mounted && [...Array(20)].map((_, i) => (
                     <motion.div
                         key={i}
                         className="absolute bg-primary/20 rounded-full"
@@ -63,13 +71,18 @@ export const Hero = () => {
 
                     <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6">
                         <span className="block text-foreground drop-shadow-lg">Mohammad Adib Abtahi</span>
-                        <GlitchText text="Cybersecurity & AI" className="text-primary block mt-2 drop-shadow-[0_0_15px_rgba(255,0,60,0.5)]" />
+                        <div className="mt-2">
+                             <GlitchText 
+                                text="Cybersecurity, AI & Blockchain" 
+                                className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-secondary to-accent drop-shadow-[0_0_15px_rgba(0,255,153,0.3)]" 
+                            />
+                        </div>
                     </h1>
 
                     <p className="max-w-2xl mx-auto text-lg md:text-xl text-muted-foreground mb-8 font-mono">
-                        Computer Science Undergraduate | AI Researcher | Full Stack Developer
+                        Securing the Digital Frontier | AI Innovation | System Architecture
                         <br />
-                        Building secure, intelligent, and scalable solutions.
+                        Crafting intelligent defense mechanisms and next-gen software solutions.
                     </p>
 
                     <div className="flex flex-col md:flex-row gap-4 justify-center items-center">

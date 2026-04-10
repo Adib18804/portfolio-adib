@@ -1,132 +1,144 @@
 "use client";
 
-import { portfolioData } from "@/data/portfolio";
 import { motion } from "framer-motion";
-import { CardContent, CardHeader, CardTitle } from "./ui/card";
-import { SpotlightCard } from "./ui/spotlight-card";
-import { Briefcase, GraduationCap } from "lucide-react";
+import { Briefcase, GraduationCap, Award } from "lucide-react";
+import { portfolioData } from "../data/portfolio";
 
 export const Experience = () => {
-    return (
-        <section id="experience" className="py-20 bg-background relative">
-            <div className="container px-4 mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <div className="grid md:grid-cols-2 gap-12">
-                        {/* Experience */}
-                        <div>
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="p-3 rounded-full bg-primary/10 text-primary">
-                                    <Briefcase size={32} />
-                                </div>
-                                <h2 className="text-3xl font-bold tracking-tight">Experience</h2>
-                            </div>
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
 
-                            <div className="space-y-6">
-                                {portfolioData.experience.map((exp, index) => (
-                                    <SpotlightCard key={index} className="bg-card/50 border-l-4 border-l-primary border-y-0 border-r-0 rounded-r-xl shadow-none" spotlightColor="rgba(255, 0, 60, 0.1)">
-                                        <CardHeader className="pb-2">
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <CardTitle className="text-lg font-bold group-hover:text-primary transition-colors">{exp.role}</CardTitle>
-                                                    <p className="text-primary font-medium">{exp.company}</p>
-                                                </div>
-                                                <span className="text-xs md:text-sm text-muted-foreground font-mono bg-muted/50 px-2 py-1 rounded border border-border/50">{exp.period}</span>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                                                {exp.details.map((detail, i) => (
-                                                    <li key={i}>{detail}</li>
-                                                ))}
-                                            </ul>
-                                        </CardContent>
-                                    </SpotlightCard>
-                                ))}
+  const item = {
+    hidden: { opacity: 0, y: 20 },
+    show: { opacity: 1, y: 0 }
+  };
 
-                                {/* Leadership */}
-                                <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
-                                    Leadership & Volunteering
-                                </h3>
-                                {portfolioData.leadership.map((role, index) => (
-                                    <SpotlightCard key={index} className="bg-card/50 border-l-4 border-l-secondary border-y-0 border-r-0 rounded-r-xl shadow-none" spotlightColor="rgba(252, 238, 10, 0.1)">
-                                        <CardHeader className="pb-2">
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <CardTitle className="text-lg font-bold group-hover:text-secondary transition-colors">{role.role}</CardTitle>
-                                                    <p className="text-secondary font-medium">{role.organization}</p>
-                                                </div>
-                                                <span className="text-xs md:text-sm text-muted-foreground font-mono bg-muted/50 px-2 py-1 rounded border border-border/50">{role.period}</span>
-                                            </div>
-                                        </CardHeader>
-                                        <CardContent>
-                                            <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                                                {role.details.map((detail, i) => (
-                                                    <li key={i}>{detail}</li>
-                                                ))}
-                                            </ul>
-                                        </CardContent>
-                                    </SpotlightCard>
-                                ))}
-                            </div>
-                        </div>
+  return (
+    <section id="experience" className="py-20 bg-background/50 relative overflow-hidden">
+      <div className="container px-4 mx-auto relative z-10">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-4xl md:text-5xl font-bold mb-16 text-center bg-clip-text text-transparent bg-gradient-to-r from-white to-white/60"
+        >
+          Experience & <span className="text-primary">Education</span>
+        </motion.h2>
 
-                        {/* Education */}
-                        <div>
-                            <div className="flex items-center gap-4 mb-8">
-                                <div className="p-3 rounded-full bg-secondary/10 text-secondary border border-secondary/20">
-                                    <GraduationCap size={32} />
-                                </div>
-                                <h2 className="text-3xl font-bold tracking-tight">Education</h2>
-                            </div>
-
-                            <div className="space-y-6">
-                                {portfolioData.education.map((edu, index) => (
-                                    <SpotlightCard key={index} className="bg-card/50 border-l-4 border-l-foreground border-y-0 border-r-0 rounded-r-xl shadow-none" spotlightColor="rgba(255, 255, 255, 0.1)">
-                                        <CardHeader className="pb-2">
-                                            <div className="flex justify-between items-start">
-                                                <div>
-                                                    <CardTitle className="text-lg font-bold">{edu.institution}</CardTitle>
-                                                    <p className="text-foreground/80 font-medium">{edu.degree}</p>
-                                                    <p className="text-sm text-muted-foreground">{edu.location}</p>
-                                                </div>
-                                                <span className="text-xs md:text-sm text-muted-foreground font-mono bg-muted/50 px-2 py-1 rounded border border-border/50">{edu.period}</span>
-                                            </div>
-                                        </CardHeader>
-                                        {edu.details && (
-                                            <CardContent>
-                                                <ul className="list-disc list-inside space-y-1 text-muted-foreground text-sm">
-                                                    {edu.details.map((detail, i) => (
-                                                        <li key={i}>{detail}</li>
-                                                    ))}
-                                                </ul>
-                                            </CardContent>
-                                        )}
-                                    </SpotlightCard>
-                                ))}
-
-                                {/* Certifications */}
-                                <h3 className="text-xl font-semibold mt-8 mb-4 text-foreground flex items-center gap-2">
-                                    <span className="w-2 h-2 rounded-full bg-foreground animate-pulse" />
-                                    Certifications
-                                </h3>
-                                <div className="flex flex-wrap gap-2">
-                                    {portfolioData.certifications.map((cert, index) => (
-                                        <span key={index} className="px-3 py-1 bg-muted/30 text-muted-foreground rounded-full text-sm border border-border/50 hover:border-primary/50 hover:text-primary transition-colors cursor-default">
-                                            {cert}
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
+        <div className="grid lg:grid-cols-2 gap-12">
+          {/* Professional Experience */}
+          <motion.div
+            variants={container}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true }}
+          >
+            <div className="flex items-center gap-3 mb-8">
+              <Briefcase className="w-6 h-6 text-primary" />
+              <h3 className="text-2xl font-semibold text-white">Professional Experience</h3>
             </div>
-        </section>
-    );
+            
+            <div className="space-y-8">
+              {portfolioData.experience.map((exp, index) => (
+                <motion.div 
+                  key={index} 
+                  variants={item}
+                  className="relative pl-8 border-l-2 border-primary/20 hover:border-primary/50 transition-colors"
+                >
+                  <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-background border-2 border-primary" />
+                  <div className="mb-1 text-sm text-primary font-mono">{exp.period}</div>
+                  <h4 className="text-xl font-bold text-white">{exp.role}</h4>
+                  <div className="text-white/60 mb-2">{exp.company}</div>
+                  <p className="text-white/80 leading-relaxed">{exp.details.join(" ")}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+
+          <div className="space-y-12">
+            {/* Education */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <GraduationCap className="w-6 h-6 text-secondary" />
+                <h3 className="text-2xl font-semibold text-white">Education</h3>
+              </div>
+
+              <div className="space-y-8">
+                {portfolioData.education.map((edu, index) => {
+                  const colors = edu.color ? edu.color.split(" ") : ["text-secondary", "border-white/10", "hover:border-secondary/50"];
+                  const textColor = colors[0];
+                  const borderColor = colors[1];
+                  const hoverBorder = colors[2];
+                  
+                  return (
+                    <motion.div 
+                      key={index}
+                      variants={item}
+                      className={`bg-white/5 backdrop-blur-sm border ${borderColor} p-6 rounded-xl ${hoverBorder} transition-colors`}
+                    >
+                      <div className="flex justify-between items-start mb-2">
+                        <h4 className={`text-xl font-bold ${textColor}`}>{edu.degree}</h4>
+                        <span className={`text-sm ${textColor} font-mono opacity-80`}>{edu.period}</span>
+                      </div>
+                      <div className="text-white/60 mb-2">{edu.institution}</div>
+                      <p className="text-white/80">{edu.details ? edu.details.join(" ") : ""}</p>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Leadership */}
+            <motion.div
+              variants={container}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+            >
+              <div className="flex items-center gap-3 mb-8">
+                <Award className="w-6 h-6 text-accent" />
+                <h3 className="text-2xl font-semibold text-white">Leadership</h3>
+              </div>
+
+              <div className="space-y-6">
+                {portfolioData.leadership.map((role, index) => {
+                  const colors = role.color ? role.color.split(" ") : ["text-accent", "border-white/5", "hover:border-accent/30"];
+                  const textColor = colors[0];
+                  const borderColor = colors[1];
+                  const hoverBorder = colors[2];
+
+                  return (
+                    <motion.div 
+                      key={index}
+                      variants={item}
+                      className={`flex items-start gap-4 p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors border ${borderColor} ${hoverBorder}`}
+                    >
+                      <div className={`w-2 h-2 mt-2 rounded-full shrink-0 ${textColor.replace("text-", "bg-")}`} />
+                      <div>
+                        <h4 className={`font-bold ${textColor}`}>{role.role}</h4>
+                        <div className={`text-sm ${textColor} opacity-80 mb-1`}>{role.organization}</div>
+                        <p className="text-sm text-white/70">{role.details.join(" ")}</p>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 };
